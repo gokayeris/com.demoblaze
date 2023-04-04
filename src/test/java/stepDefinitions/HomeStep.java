@@ -22,9 +22,9 @@ public class HomeStep {
         //Assert.assertEquals(Driver.getDriver().getCurrentUrl(),"https://www.demoblaze.com/index.html");
         homePage.verifySignupPopup();
     }
-    @When("User enters username (.*) on signup")
+    @When("User enters username {string} on signup")
     public void user_enters_username(String string) { homePage.sendTextUsername(string);  }
-    @When("User enters password (.*) on signup")
+    @When("User enters password {string} on signup")
     public void user_enters_password(String string) {
         homePage.sendTextPassword(string);
     }
@@ -32,10 +32,7 @@ public class HomeStep {
     public void user_clicks_on_login_button() { homePage.clickButtonLoginHome();   }
     @Then("User verifies sings up successfully")
     public void user_verifies_sings_up_successfully() {
-        Alert alert = Driver.getDriver().switchTo().alert();
-        String alertMessage = alert.getText();
-        Assert.assertEquals("Sign up successful.", alertMessage);
-        alert.accept();
+        homePage.verifyAlert();
     }
 
     @Then("User clicks on singup button on home page")
@@ -51,16 +48,16 @@ public class HomeStep {
         //Assert.assertEquals(Driver.getDriver().getCurrentUrl(),"https://www.demoblaze.com/index.html");
         homePage.verifyPopupLogin();
     }
-    @When("User enters username (.*) on login.")
+    @When("User enters username {string} on login.")
     public void LoginEntersUsername(String string) { homePage.sendTextLoginUsername(string);  }
-    @When("User enters password (.*) on login.")
+    @When("User enters password {string} on login.")
     public void LoginEntersPassword(String string) {
         homePage.sendTextLoginPassword(string);
     }
     @And("User clicks on login button on login popup")
     public void ClicksOnButtonLoginPopup() { homePage.clickButtonLoginPopup();   }
     @Then("User verifies logged in successfully")
-    public void verifyLoggedin() { homePage.verifyloggedin(); }
+    public void verifyLoggedin() { homePage.verifyLoggedin(); }
     @When("User logs out")
     public void userLogsOut() {homePage.logOut();
     }

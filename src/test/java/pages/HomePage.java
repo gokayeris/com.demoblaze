@@ -1,8 +1,12 @@
 package pages;
 
+import org.junit.Assert;
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+
+import static utilities.Utils.waitAlert;
 
 public class HomePage {
     private WebDriver lDriver;
@@ -87,7 +91,7 @@ public class HomePage {
     public void clickButtonLoginPopup(){
         getButtonLoginPopup().click();
     }
-    public void verifyloggedin(){
+    public void verifyLoggedin(){
         getButtonHomeLogout().isDisplayed();
     }
     public void logOut(){
@@ -96,7 +100,12 @@ public class HomePage {
     public void verifyLoggedOut()  {
         getButtonLoginHome().isDisplayed();
     }
+    public void verifyAlert() {
+        Alert alert = waitAlert(lDriver);
+        String alertMessage = alert.getText();
+        Assert.assertEquals("Sign up successful.", alertMessage);
+        alert.accept();
 
-
+    }
 
 }

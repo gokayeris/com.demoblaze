@@ -3,12 +3,11 @@ package stepDefinitions;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import org.junit.Assert;
-import org.openqa.selenium.Alert;
 import pages.CategoriesPage;
 import utilities.Driver;
 
 public class CategoriesStep {
+
 
     CategoriesPage categoriesPage = new CategoriesPage(Driver.getDriver());
 
@@ -21,14 +20,19 @@ public class CategoriesStep {
     }
 
     @And("User adds it to cart")
-    public void userAddsItToCart() { categoriesPage.addToCart(); }
+    public void userAddsItToCart() {
+        categoriesPage.addToCart();
+        categoriesPage.verifyAlert();
+    }
+    @Then ("User clicks on Cart menu")
+    public void userClicksOnCartMenu(){
+        categoriesPage.clickOnButtonCart();
+    }
 
     @And("User verifies the laptop added to cart")
     public void userVerifiesTheLaptopAddedToCart() {
-        Alert alert = Driver.getDriver().switchTo().alert();
-        String alertMessage = alert.getText();
-        Assert.assertEquals("Product added.", alertMessage);
-        alert.accept();
+        categoriesPage.verifyProductAddedOnCart();
+
     }
 
 
